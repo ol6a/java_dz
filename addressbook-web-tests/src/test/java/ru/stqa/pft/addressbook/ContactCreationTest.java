@@ -19,17 +19,37 @@ public class ContactCreationTest {
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.get("http://localhost/addressbook/");
+    login();
   }
 
-  @Test
-  public void testContactCreation() throws Exception {
-    wd.get("http://localhost/addressbook/");
+  private void login() {
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-    wd.findElement(By.linkText("add new")).click();
+  }
+
+  @Test
+  public void testContactCreation() throws Exception {
+
+    initContactCreation();
+    fillContactForm();
+    submitContactCreation();
+    returnToHomePage();
+
+  }
+
+  private void returnToHomePage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
+  private void submitContactCreation() {
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  private void fillContactForm() {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys("Дарина");
@@ -57,9 +77,10 @@ public class ContactCreationTest {
     wd.findElement(By.name("email3")).clear();
     wd.findElement(By.name("email3")).sendKeys("rr3@moi-uni.ru");
     wd.findElement(By.name("theform")).click();
-    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
-    wd.findElement(By.linkText("home page")).click();
-    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void initContactCreation() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterMethod(alwaysRun = true)
@@ -68,7 +89,12 @@ public class ContactCreationTest {
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);
+      logout();
     }
+  }
+
+  private void logout() {
+    wd.findElement(By.linkText("Logout")).click();
   }
 
   private boolean isElementPresent(By by) {
