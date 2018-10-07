@@ -9,9 +9,9 @@ public class ContactDeletionTests extends TestBase {
   @Test
   public void testContactDeletion() throws Exception {
 
-    selectContact();
-    deleteSelectedContact();
-    wd.switchTo().alert().accept();
+    app.selectContact();
+    app.deleteSelectedContact();
+    app.wd.switchTo().alert().accept();
 
   }
 
