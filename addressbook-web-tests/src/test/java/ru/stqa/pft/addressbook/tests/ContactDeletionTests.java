@@ -10,9 +10,8 @@ public class ContactDeletionTests extends TestBase {
   public void testContactDeletion() throws Exception {
     app.getContactHelper().selectContact();
     app.getContactHelper().deleteSelectedContact();
-    app.getGroupHelper().wd.switchTo().alert().accept();
-    app.getContactHelper().returnToHomePage();
-
+    app.getContactHelper().wd.switchTo().alert().accept();
+    
   }
 
 
