@@ -19,14 +19,14 @@ public class ContactHelper extends HelperBase{
         type(By.name("firstname"),contactData.getFirstname());
         type(By.name("lastname"),contactData.getLastname());
         type(By.name("address"),contactData.getAddress());
-        click(By.name("theform"));
+
         type(By.name("home"),contactData.getHometelephone());
         type(By.name("mobile"),contactData.getMobiletelephone());
         type(By.name("work"),contactData.getWorktelephone());
         type(By.name("email"),contactData.getEmail());
         type(By.name("email2"),contactData.getEmail2());
         type(By.name("email3"),contactData.getEmail3());
-        click(By.name("theform"));
+
     }
 
     public void initContactCreation() {
@@ -43,5 +43,13 @@ public class ContactHelper extends HelperBase{
 
     public void deleteSelectedContact() {
         click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void initContactModification() {
+        click(By.cssSelector("img[alt=\"Edit\"]"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
     }
 }
