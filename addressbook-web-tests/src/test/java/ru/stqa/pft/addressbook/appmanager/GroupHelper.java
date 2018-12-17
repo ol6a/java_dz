@@ -54,13 +54,8 @@ public class GroupHelper extends HelperBase {
         submitGroupCreation();
         returnToGroupPage();
     }
-
-    public boolean isThereAGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
     public List<GroupData> getGroupList() {
-        List <GroupData> groups = new ArrayList <GroupData>();
+        List <GroupData> groups = new ArrayList<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements){
             String name = element.getText();
@@ -69,4 +64,10 @@ public class GroupHelper extends HelperBase {
         }
         return groups;
     }
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+
+
 }
