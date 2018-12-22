@@ -10,6 +10,7 @@ public class GroupData {
 
 
 
+
     public GroupData(String name, String header, String footer) {
         this.id = Integer.MAX_VALUE;
         this.name = name;
@@ -60,5 +61,4 @@ public class GroupData {
     public int hashCode() {
         return Objects.hash(name);
     }
-
 }
