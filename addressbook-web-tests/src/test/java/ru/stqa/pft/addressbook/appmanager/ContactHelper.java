@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -37,9 +38,6 @@ public class ContactHelper extends HelperBase{
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
 
     public void returnToHomePage() {
         click(By.linkText("home page"));
@@ -64,22 +62,28 @@ public class ContactHelper extends HelperBase{
         returnToHomePage();
     }
 
-    public void modify(int index, ContactData contact) {
-        selectContact(index);
+
+    public void modify(ContactData contact) {
+        selectContactById(contact.getId());
         initContactModification();
         fillContactForm(contact);
         submitContactModification();
         returnToHomePage();
     }
 
-    public void delete(int index) {
-        selectContact(index);
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
         deleteSelectedContact();
         wd.switchTo().alert().accept();
     }
 
-    public List<ContactData> scroll() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    private void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
+    }
+
+
+    public Set<ContactData> whole() {
+        Set<ContactData> contacts = new HashSet<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.cssSelector("td"));
@@ -89,6 +93,8 @@ public class ContactHelper extends HelperBase{
             contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
-
     }
+
+
 }
+
