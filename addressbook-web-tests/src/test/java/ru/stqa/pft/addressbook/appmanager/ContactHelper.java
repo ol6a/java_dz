@@ -1,12 +1,12 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.Contacts;
+        import org.openqa.selenium.By;
+        import org.openqa.selenium.WebDriver;
+        import org.openqa.selenium.WebElement;
+        import ru.stqa.pft.addressbook.model.ContactData;
+        import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.List;
+        import java.util.List;
 
 public class ContactHelper extends HelperBase{
 
@@ -30,6 +30,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("email"),contactData.getEmail());
         type(By.name("email2"),contactData.getEmail2());
         type(By.name("email3"),contactData.getEmail3());
+        attach(By.name("photo"),contactData.getPhoto());
 
     }
 
@@ -117,8 +118,8 @@ public class ContactHelper extends HelperBase{
         String work=wd.findElement(By.name("work")).getAttribute("value");
         String address=wd.findElement(By.name("address")).getText();
         String email= wd.findElement(By.name("email")).getAttribute("value");
-                String email2=wd.findElement(By.name("email2")).getAttribute("value");
-                String email3=wd.findElement(By.name("email3")).getAttribute("value");
+        String email2=wd.findElement(By.name("email2")).getAttribute("value");
+        String email3=wd.findElement(By.name("email3")).getAttribute("value");
         return new ContactData().withId(contact.getId()).withFirstname(firstname) .withLastname(lastname)
                 .withAddress(address)
                 .withEmail(email).withEmail2(email2).withEmail3(email3)
