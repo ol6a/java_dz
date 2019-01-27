@@ -54,14 +54,16 @@ public class ContactDataGenerator {
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts =new ArrayList<ContactData>();
         for (int i=0; i<count; i++){
+            File photo = new File("src/test/resources/kartinka.png");
             contacts.add(new ContactData().withFirstname("Арина").withLastname("Розина")
                     .withAddress(String.format("г. Москва, ул. Дружбы, %s-%s",i,i))
                     .withHomePhone(String.format("%s%s-%s%s-%s%s",i,i,i,i,i,i))
-                    .withMobilePhone(String.format("%s%s-%s%s-%s%s",i,i,i+1,i,i,i))
+                    .withMobilePhone(String.format("+7911%s%s%s%s%s%s%s",i,i,i+1,i,i,i,i))
                     .withWorkPhone(String.format("%s%s-%s%s-%s%s",i,i,i,i,i+2,i))
                     .withEmail(String.format("rr%s@moi-uni.ru",i))
                     .withEmail2(String.format("era%s@moi-uni.ru",i))
-                    .withEmail3(String.format("oplata%s@moi-uni.ru",i)));
+                    .withEmail3(String.format("oplata%s@moi-uni.ru",i))
+                    .withPhoto(photo));
         }
         return contacts;
     }
