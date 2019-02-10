@@ -34,8 +34,6 @@ public class HbConnectionTest {
 
     @Test
     public void testHbConnection(){
-
-
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();
@@ -45,8 +43,6 @@ public class HbConnectionTest {
         }
         session.getTransaction().commit();
         session.close();
-
-
 
     }
 }
