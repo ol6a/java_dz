@@ -1,12 +1,13 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import ru.stqa.pft.addressbook.model.ContactData;
-        import ru.stqa.pft.addressbook.model.Contacts;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-        import java.util.List;
+import java.util.List;
 
 public class ContactHelper extends HelperBase{
 
@@ -125,6 +126,29 @@ public class ContactHelper extends HelperBase{
                 .withEmail(email).withEmail2(email2).withEmail3(email3)
                 .withHomePhone(home)
                 .withMobilePhone(mobile).withWorkPhone(work);
+    }
+
+    public void getContactNoGroup() {
+        wd.findElement(By.name("group")).click();
+        new Select((wd.findElement(By.name("group")))).selectByVisibleText("[none]");
+        wd.findElement(By.name("group")).click();
+    }
+
+    public void addToGroup(int contid, int groupid) {
+        wd.findElement(By.cssSelector("input[value='"+contid+"']")).click();
+        wd.findElement(By.name("to_group")).click();
+        String.format("new Select((wd.findElement(By.name('to_group')))).selectByValue(%s)", groupid);
+        wd.findElement(By.name("add")).click();
+
+    }
+
+    public void removeContFromGr(int groupId) {
+        wd.findElement(By.name("group")).click();
+        String.format("new Select((wd.findElement(By.name('group')))).selectByValue(%s)", groupId);
+        wd.findElement(By.name("group")).click();
+        wd.findElement(By.name("selected[]")).click();
+        wd.findElement(By.name("remove")).click();
+
     }
 }
 
